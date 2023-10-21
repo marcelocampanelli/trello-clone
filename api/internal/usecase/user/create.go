@@ -33,7 +33,7 @@ type CreateUserOutputDTO struct {
 }
 
 type CreateUserUseCaseInterface interface {
-	Execute(input CreateUserInputDTO) (*CreateUserOutputDTO, error)
+	Execute(input *CreateUserInputDTO) (*CreateUserOutputDTO, error)
 }
 
 type CreateUserUseCase struct {
@@ -44,7 +44,7 @@ func NewUserCreateUseCase(userGateway gateway.UserGateway) *CreateUserUseCase {
 	return &CreateUserUseCase{UserGateway: userGateway}
 }
 
-func (useCase *CreateUserUseCase) Execute(input CreateUserInputDTO) (*CreateUserOutputDTO, error) {
+func (useCase *CreateUserUseCase) Execute(input *CreateUserInputDTO) (*CreateUserOutputDTO, error) {
 	_, err := useCase.UserGateway.FindByEmail(input.Email)
 	if err == nil {
 		return nil, ErrEmailAlreadyExists

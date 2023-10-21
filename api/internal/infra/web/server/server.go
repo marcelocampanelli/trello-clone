@@ -7,11 +7,11 @@ import (
 )
 
 type Server struct {
-	client *mongo.Client
+	Client *mongo.Client
 }
 
 func NewServer(client *mongo.Client) *Server {
-	return &Server{client: client}
+	return &Server{Client: client}
 }
 
 func (server *Server) Start() chi.Router {
@@ -19,7 +19,9 @@ func (server *Server) Start() chi.Router {
 
 	router.Use(middleware.Logger)
 	router.Use(middleware.Recoverer)
-	router.Group(func(r chi.Router) {})
+	router.Group(func(r chi.Router) {
+		server.UserRoutes(r)
+	})
 
 	return router
 }

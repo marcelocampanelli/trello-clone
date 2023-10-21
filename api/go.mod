@@ -5,6 +5,7 @@ go 1.21.3
 require (
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/go-playground/validator/v10 v10.15.5
+	github.com/google/wire v0.5.0
 	github.com/klassmann/cpfcnpj v0.0.0-20200907140233-a595c5fd8de1
 	github.com/stretchr/testify v1.8.2
 	go.mongodb.org/mongo-driver v1.12.1

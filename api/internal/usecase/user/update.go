@@ -20,7 +20,7 @@ type UpdateUserOutputDTO struct {
 }
 
 type UpdateUserUseCaseInterface interface {
-	Execute(input UpdateUserInputDTO) (*UpdateUserOutputDTO, error)
+	Execute(input *UpdateUserInputDTO) (*UpdateUserOutputDTO, error)
 }
 
 type UpdateUserUseCase struct {
