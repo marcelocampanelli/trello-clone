@@ -38,6 +38,7 @@ func (handler *UserHandler) Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(output)
 }
 
@@ -52,7 +53,7 @@ func (handler *UserHandler) Update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dto.ID = chi.URLParam(r, "id")
-	
+
 	output, err := handler.ucUpdate.Execute(&dto)
 	if err != nil {
 		fmt.Println("User Handler: error to execute use case", err)
@@ -61,5 +62,6 @@ func (handler *UserHandler) Update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(output)
 }
