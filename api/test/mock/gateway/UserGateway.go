@@ -80,15 +80,15 @@ func (_m *UserGateway) FindByEmail(email string) (*entity.User, error) {
 }
 
 // FindByID provides a mock function with given fields: id
-func (_m *UserGateway) FindByID(id int32) (*entity.User, error) {
+func (_m *UserGateway) FindByID(id string) (*entity.User, error) {
 	ret := _m.Called(id)
 
 	var r0 *entity.User
 	var r1 error
-	if rf, ok := ret.Get(0).(func(int32) (*entity.User, error)); ok {
+	if rf, ok := ret.Get(0).(func(string) (*entity.User, error)); ok {
 		return rf(id)
 	}
-	if rf, ok := ret.Get(0).(func(int32) *entity.User); ok {
+	if rf, ok := ret.Get(0).(func(string) *entity.User); ok {
 		r0 = rf(id)
 	} else {
 		if ret.Get(0) != nil {
@@ -96,7 +96,7 @@ func (_m *UserGateway) FindByID(id int32) (*entity.User, error) {
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(int32) error); ok {
+	if rf, ok := ret.Get(1).(func(string) error); ok {
 		r1 = rf(id)
 	} else {
 		r1 = ret.Error(1)

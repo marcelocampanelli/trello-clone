@@ -9,7 +9,7 @@ import (
 )
 
 type User struct {
-	ID        int32     `json:"id"         bson:"id"`
+	ID        string    `json:"id"         bson:"id"`
 	FirstName string    `json:"first_name" bson:"first_name" validate:"required"`
 	LastName  string    `json:"last_name"  bson:"last_name"  validate:"required"`
 	Nickname  string    `json:"nickname"   bson:"nickname"   validate:"required"`
