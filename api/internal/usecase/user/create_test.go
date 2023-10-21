@@ -10,8 +10,10 @@ import (
 )
 
 func TestCreateUserUseCase_Execute(t *testing.T) {
+	userID := "1"
+
 	m := &mocks.UserGateway{}
-	m.On("Create", mock.Anything).Return(nil)
+	m.On("Create", mock.Anything).Return(&userID, nil)
 	m.On("FindByEmail", mock.Anything).Return(nil, errors.New("not found"))
 	m.On("FindByCPF", mock.Anything).Return(nil, errors.New("not found"))
 
@@ -26,7 +28,7 @@ func TestCreateUserUseCase_Execute(t *testing.T) {
 		CPF:       "35050817013",
 	}
 
-	output, err := useCase.Execute(input)
+	output, err := useCase.Execute(&input)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, output)
@@ -50,7 +52,7 @@ func TestCreateUserUseCase_Execute_EmailAlreadyExists(t *testing.T) {
 		CPF:       "35050817013",
 	}
 
-	output, err := useCase.Execute(input)
+	output, err := useCase.Execute(&input)
 
 	assert.NotNil(t, err)
 	assert.Nil(t, output)
@@ -77,7 +79,7 @@ func TestCreateUserUseCase_Execute_CPFAlreadyExists(t *testing.T) {
 		CPF:       "35050817013",
 	}
 
-	output, err := useCase.Execute(input)
+	output, err := useCase.Execute(&input)
 	assert.NotNil(t, err)
 	assert.Nil(t, output)
 	assert.Equal(t, ErrCPFAlreadyExists, err)

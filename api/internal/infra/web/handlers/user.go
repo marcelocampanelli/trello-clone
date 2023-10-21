@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/go-chi/chi/v5"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/user"
 	"net/http"
 )
@@ -41,16 +42,18 @@ func (handler *UserHandler) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 func (handler *UserHandler) Update(w http.ResponseWriter, r *http.Request) {
-	var input user.UpdateUserInputDTO
+	var dto user.UpdateUserInputDTO
 
-	err := json.NewDecoder(r.Body).Decode(&input)
+	err := json.NewDecoder(r.Body).Decode(&dto)
 	if err != nil {
 		fmt.Println("User Handler: error to decode body", err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	output, err := handler.ucUpdate.Execute(&input)
+	dto.ID = chi.URLParam(r, "id")
+	
+	output, err := handler.ucUpdate.Execute(&dto)
 	if err != nil {
 		fmt.Println("User Handler: error to execute use case", err)
 		w.WriteHeader(http.StatusInternalServerError)

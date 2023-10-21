@@ -20,17 +20,20 @@ func NewUserRepository(client *mongo.Client) *UserRepository {
 	}
 }
 
-func (repository *UserRepository) Create(user *entity.User) error {
-	_, err := repository.Collection.InsertOne(context.Background(), user)
+func (repository *UserRepository) Create(user *entity.User) (*string, error) {
+	result, err := repository.Collection.InsertOne(context.Background(), user)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	userID := result.InsertedID.(primitive.ObjectID).Hex()
+
+	return &userID, nil
 }
 
-func (repository *UserRepository) Update(user *entity.User) error {
-	objectID, err := primitive.ObjectIDFromHex(user.ID)
+func (repository *UserRepository) Update(id string, user *entity.User) error {
+	objectID, err := primitive.ObjectIDFromHex(id)
+
 	if err != nil {
 		return err
 	}

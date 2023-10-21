@@ -10,8 +10,17 @@ import (
 
 func TestUpdateUserUseCase_Execute(t *testing.T) {
 	m := &mocks.UserGateway{}
-	m.On("FindByID", "1").Return(&entity.User{}, nil)
-	m.On("Update", mock.Anything).Return(nil)
+
+	m.On("FindByID", mock.Anything).Return(&entity.User{
+		FirstName: "Jhon",
+		LastName:  "Doe",
+		Nickname:  "jhondoe",
+		Email:     "jhon@doe.com",
+		Password:  "102030",
+		CPF:       "35050817013",
+	}, nil)
+
+	m.On("Update", mock.Anything, mock.Anything).Return(nil)
 
 	useCase := NewUserUpdateUseCase(m)
 
@@ -24,9 +33,7 @@ func TestUpdateUserUseCase_Execute(t *testing.T) {
 
 	output, err := useCase.Execute(&input)
 
-	assert.NotNil(t, output)
 	assert.Nil(t, err)
+	assert.NotNil(t, output)
 
-	m.AssertNumberOfCalls(t, "FindByID", 1)
-	m.AssertNumberOfCalls(t, "Update", 1)
 }

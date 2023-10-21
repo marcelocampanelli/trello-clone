@@ -1,6 +1,8 @@
 package user
 
-import "github.com/marcelocampanelli/trello-clone/internal/domain/gateway"
+import (
+	"github.com/marcelocampanelli/trello-clone/internal/domain/gateway"
+)
 
 type UpdateUserInputDTO struct {
 	ID        string `json:"id"`
@@ -39,13 +41,13 @@ func (useCase *UpdateUserUseCase) Execute(input *UpdateUserInputDTO) (*UpdateUse
 
 	user.Modify(input.FirstName, input.LastName, input.Nickname)
 
-	err = useCase.UserGateway.Update(user)
+	err = useCase.UserGateway.Update(input.ID, user)
 	if err != nil {
 		return nil, err
 	}
 
 	return &UpdateUserOutputDTO{
-		ID:        user.ID,
+		ID:        input.ID,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
 		Nickname:  user.Nickname,

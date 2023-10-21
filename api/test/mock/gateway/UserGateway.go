@@ -14,17 +14,29 @@ type UserGateway struct {
 }
 
 // Create provides a mock function with given fields: user
-func (_m *UserGateway) Create(user *entity.User) error {
+func (_m *UserGateway) Create(user *entity.User) (*string, error) {
 	ret := _m.Called(user)
 
-	var r0 error
-	if rf, ok := ret.Get(0).(func(*entity.User) error); ok {
+	var r0 *string
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*entity.User) (*string, error)); ok {
+		return rf(user)
+	}
+	if rf, ok := ret.Get(0).(func(*entity.User) *string); ok {
 		r0 = rf(user)
 	} else {
-		r0 = ret.Error(0)
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*string)
+		}
 	}
 
-	return r0
+	if rf, ok := ret.Get(1).(func(*entity.User) error); ok {
+		r1 = rf(user)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // FindByCPF provides a mock function with given fields: cpf
@@ -105,13 +117,13 @@ func (_m *UserGateway) FindByID(id string) (*entity.User, error) {
 	return r0, r1
 }
 
-// Update provides a mock function with given fields: user
-func (_m *UserGateway) Update(user *entity.User) error {
-	ret := _m.Called(user)
+// Update provides a mock function with given fields: id, user
+func (_m *UserGateway) Update(id string, user *entity.User) error {
+	ret := _m.Called(id, user)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(*entity.User) error); ok {
-		r0 = rf(user)
+	if rf, ok := ret.Get(0).(func(string, *entity.User) error); ok {
+		r0 = rf(id, user)
 	} else {
 		r0 = ret.Error(0)
 	}

@@ -2,6 +2,7 @@ package user
 
 import (
 	"errors"
+	"fmt"
 	"github.com/marcelocampanelli/trello-clone/internal/domain/entity"
 	"github.com/marcelocampanelli/trello-clone/internal/domain/gateway"
 )
@@ -60,10 +61,12 @@ func (useCase *CreateUserUseCase) Execute(input *CreateUserInputDTO) (*CreateUse
 		return nil, ErrCreateUser
 	}
 
-	err = useCase.UserGateway.Create(user)
+	result, err := useCase.UserGateway.Create(user)
+
+	fmt.Println(user)
 
 	return &CreateUserOutputDTO{
-		ID:        user.ID,
+		ID:        *result,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
 		Nickname:  user.Nickname,

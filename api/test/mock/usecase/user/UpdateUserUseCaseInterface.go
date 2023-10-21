@@ -13,15 +13,15 @@ type UpdateUserUseCaseInterface struct {
 }
 
 // Execute provides a mock function with given fields: input
-func (_m *UpdateUserUseCaseInterface) Execute(input user.UpdateUserInputDTO) (*user.UpdateUserOutputDTO, error) {
+func (_m *UpdateUserUseCaseInterface) Execute(input *user.UpdateUserInputDTO) (*user.UpdateUserOutputDTO, error) {
 	ret := _m.Called(input)
 
 	var r0 *user.UpdateUserOutputDTO
 	var r1 error
-	if rf, ok := ret.Get(0).(func(user.UpdateUserInputDTO) (*user.UpdateUserOutputDTO, error)); ok {
+	if rf, ok := ret.Get(0).(func(*user.UpdateUserInputDTO) (*user.UpdateUserOutputDTO, error)); ok {
 		return rf(input)
 	}
-	if rf, ok := ret.Get(0).(func(user.UpdateUserInputDTO) *user.UpdateUserOutputDTO); ok {
+	if rf, ok := ret.Get(0).(func(*user.UpdateUserInputDTO) *user.UpdateUserOutputDTO); ok {
 		r0 = rf(input)
 	} else {
 		if ret.Get(0) != nil {
@@ -29,7 +29,7 @@ func (_m *UpdateUserUseCaseInterface) Execute(input user.UpdateUserInputDTO) (*u
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(user.UpdateUserInputDTO) error); ok {
+	if rf, ok := ret.Get(1).(func(*user.UpdateUserInputDTO) error); ok {
 		r1 = rf(input)
 	} else {
 		r1 = ret.Error(1)
