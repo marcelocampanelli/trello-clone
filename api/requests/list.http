@@ -1,0 +1,35 @@
+POST http://localhost:8080/api/v1/lists
+Content-Type: application/json
+
+{
+  "name": "My List",
+  "board_id": "6534270e2b4414fdaa0b3b86",
+  "position": 1
+}
+
+###
+
+PUT http://localhost:8080/api/v1/lists/65345880ee859ffb4156c7bf
+Content-Type: application/json
+
+{
+  "name": "My List Updated",
+  "board_id": "6534270e2b4414fdaa0b3b86",
+  "position": 1
+}
+
+###
+
+DELETE http://localhost:8080/api/v1/lists/65345880ee859ffb4156c7bf
+
+###
+
+GET http://localhost:8080/api/v1/lists/board/6534270e2b4414fdaa0b3b86
+
+###
+
+GET http://localhost:8080/api/v1/lists/653459a09815d6168974d42c
+
+###
+
+

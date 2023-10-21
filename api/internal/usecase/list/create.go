@@ -44,7 +44,7 @@ func (useCase *CreateListUseCase) Execute(input *CreateListInputDTO) (*CreateLis
 	}
 
 	return &CreateListOutputDTO{
-		ID:        result.ID.String(),
+		ID:        result.ID.Hex(),
 		Name:      result.Name,
 		BoardID:   result.BoardID,
 		Position:  result.Position,

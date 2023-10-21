@@ -43,7 +43,7 @@ func (useCase *UpdateListUseCase) Execute(input *UpdateListInputDTO) (*UpdateLis
 	}
 
 	return &UpdateListOutputDTO{
-		ID:       result.ID.String(),
+		ID:       result.ID.Hex(),
 		Name:     result.Name,
 		Position: result.Position,
 	}, nil

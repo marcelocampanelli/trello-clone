@@ -38,7 +38,7 @@ func (useCase *FindAllListUseCase) Execute(input *FindAllListInputDTO) (*FindAll
 	var listsCollection []*ListCollection
 	for _, list := range lists {
 		listsCollection = append(listsCollection, &ListCollection{
-			ID:       list.ID.String(),
+			ID:       list.ID.Hex(),
 			Name:     list.Name,
 			Position: list.Position,
 			CardsIDs: list.CardsIDs,

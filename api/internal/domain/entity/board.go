@@ -7,13 +7,13 @@ import (
 )
 
 type Board struct {
-	ID          primitive.ObjectID `json:"id"           bson:"_id"          validate:"-"`
-	Name        string             `json:"name"         bson:"name"         validate:"required"`
-	Description string             `json:"description"  bson:"description"  validate:"-"`
-	UserFounder string             `json:"user_founder" bson:"user_founder" validate:"required"`
-	ListsIds    []string           `json:"listsIds"     bson:"listsIds"     validate:"-"`
-	CreatedAt   time.Time          `json:"createdAt"    bson:"createdAt"    validate:"-"`
-	UpdatedAt   time.Time          `json:"updatedAt"    bson:"updatedAt"    validate:"-"`
+	ID          primitive.ObjectID `json:"id"            bson:"_id"          validate:"-"`
+	Name        string             `json:"name"          bson:"name"         validate:"required"`
+	Description string             `json:"description"   bson:"description"  validate:"-"`
+	UserFounder string             `json:"user_founder"  bson:"user_founder" validate:"required"`
+	ListsIds    []string           `json:"lists_ids"     bson:"lists_ids"    validate:"-"`
+	CreatedAt   time.Time          `json:"created_at"    bson:"created_at"   validate:"-"`
+	UpdatedAt   time.Time          `json:"updated_at"    bson:"updated_at"   validate:"-"`
 }
 
 func NewBoard(name, description, user_founder string) (*Board, error) {

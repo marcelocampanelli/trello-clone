@@ -35,7 +35,7 @@ func (useCase *FindByIDListUseCase) Execute(input *FindByIDListInputDTO) (*FindB
 	}
 
 	return &FindByIDListOutputDTO{
-		ID:        list.ID.String(),
+		ID:        list.ID.Hex(),
 		Name:      list.Name,
 		BoardID:   list.BoardID,
 		Position:  list.Position,

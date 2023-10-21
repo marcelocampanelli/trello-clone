@@ -9,11 +9,11 @@ import (
 type List struct {
 	ID        primitive.ObjectID `json:"id"           bson:"_id"          validate:"-"`
 	Name      string             `json:"name"         bson:"name"         validate:"required"`
-	BoardID   string             `json:"boardId"      bson:"boardId"      validate:"-"`
+	BoardID   string             `json:"boardId"      bson:"board_id"      validate:"-"`
 	Position  int                `json:"position"     bson:"position"     validate:"-"`
-	CardsIDs  []string           `json:"cardsIds"     bson:"cardsIds"     validate:"-"`
-	CreatedAt time.Time          `json:"createdAt"    bson:"createdAt"    validate:"-"`
-	UpdatedAt time.Time          `json:"updatedAt"    bson:"updatedAt"    validate:"-"`
+	CardsIDs  []string           `json:"cardsIds"     bson:"cards_ids"     validate:"-"`
+	CreatedAt time.Time          `json:"createdAt"    bson:"created_at"    validate:"-"`
+	UpdatedAt time.Time          `json:"updatedAt"    bson:"updated_at"    validate:"-"`
 }
 
 func NewList(name, boardID string, position int) (*List, error) {
