@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/marcelocampanelli/trello-clone/internal/domain/infra/database/mongodb"
+	"github.com/marcelocampanelli/trello-clone/internal/infra/database/mongodb"
 )
 
 func main() {
