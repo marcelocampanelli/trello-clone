@@ -11,6 +11,7 @@ type Board struct {
 	Name        string             `json:"name"         bson:"name"         validate:"required"`
 	Description string             `json:"description"  bson:"description"  validate:"-"`
 	UserFounder string             `json:"user_founder" bson:"user_founder" validate:"required"`
+	ListsIds    []string           `json:"listsIds"     bson:"listsIds"     validate:"-"`
 	CreatedAt   time.Time          `json:"createdAt"    bson:"createdAt"    validate:"-"`
 	UpdatedAt   time.Time          `json:"updatedAt"    bson:"updatedAt"    validate:"-"`
 }
@@ -21,6 +22,7 @@ func NewBoard(name, description, user_founder string) (*Board, error) {
 		Name:        name,
 		Description: description,
 		UserFounder: user_founder,
+		ListsIds:    []string{},
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
 	}
