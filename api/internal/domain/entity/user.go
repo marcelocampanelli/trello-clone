@@ -65,3 +65,17 @@ func (user *User) isValid() error {
 
 	return nil
 }
+
+func (user *User) Modify(firstName, lastName, nickname string) error {
+	user.FirstName = firstName
+	user.LastName = lastName
+	user.Nickname = nickname
+	user.UpdatedAt = time.Now()
+
+	err := user.isValid()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
