@@ -7,12 +7,13 @@ type FindByIDListInputDTO struct {
 }
 
 type FindByIDListOutputDTO struct {
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-	BoardID   string `json:"board_id"`
-	Position  int    `json:"position"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	ID        string   `json:"id"`
+	Name      string   `json:"name"`
+	BoardID   string   `json:"board_id"`
+	CardsIDs  []string `json:"cards_ids"`
+	Position  int      `json:"position"`
+	CreatedAt string   `json:"created_at"`
+	UpdatedAt string   `json:"updated_at"`
 }
 
 type FindByIDListUseCaseInterface interface {
@@ -38,6 +39,7 @@ func (useCase *FindByIDListUseCase) Execute(input *FindByIDListInputDTO) (*FindB
 		Name:      list.Name,
 		BoardID:   list.BoardID,
 		Position:  list.Position,
+		CardsIDs:  list.CardsIDs,
 		CreatedAt: list.CreatedAt.String(),
 		UpdatedAt: list.UpdatedAt.String(),
 	}, nil

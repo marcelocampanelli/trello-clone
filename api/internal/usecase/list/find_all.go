@@ -11,9 +11,10 @@ type FindAllListOutputDTO struct {
 }
 
 type ListCollection struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Position int    `json:"position"`
+	ID       string   `json:"id"`
+	Name     string   `json:"name"`
+	Position int      `json:"position"`
+	CardsIDs []string `json:"cards_ids"`
 }
 
 type FindAllListUseCaseInterface interface {
@@ -40,6 +41,7 @@ func (useCase *FindAllListUseCase) Execute(input *FindAllListInputDTO) (*FindAll
 			ID:       list.ID.String(),
 			Name:     list.Name,
 			Position: list.Position,
+			CardsIDs: list.CardsIDs,
 		})
 	}
 
