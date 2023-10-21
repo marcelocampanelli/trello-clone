@@ -2,14 +2,19 @@ package mongodb
 
 import (
 	"context"
-	"fmt"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.uber.org/zap"
 	"time"
 )
 
 func ConnectMongoDB() (*mongo.Client, error) {
 	//mongodb://<username>:<password>@<host>:<port>
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
+
+	sugar := logger.Sugar()
+
 	connectionString := "mongodb://root:root@localhost:27017"
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -25,11 +30,11 @@ func ConnectMongoDB() (*mongo.Client, error) {
 
 	err = client.Ping(ctx, nil)
 	if err != nil {
-		fmt.Println("error on ping mongodb")
+		sugar.Error("Error on ping in MongoDB")
 		return nil, err
 	}
 
-	fmt.Println("mongodb connected")
+	sugar.Info("Connected in MongoDB")
 
 	return client, nil
 }
