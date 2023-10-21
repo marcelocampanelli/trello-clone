@@ -39,7 +39,10 @@ func (useCase *UpdateUserUseCase) Execute(input *UpdateUserInputDTO) (*UpdateUse
 		return nil, err
 	}
 
-	user.Modify(input.FirstName, input.LastName, input.Nickname)
+	err = user.Modify(input.FirstName, input.LastName, input.Nickname)
+	if err != nil {
+		return nil, err
+	}
 
 	err = useCase.UserGateway.Update(input.ID, user)
 	if err != nil {
