@@ -1,0 +1,30 @@
+POST http://localhost:8080/api/v1/boards
+Content-Type: application/json
+
+{
+    "name": "Board 1",
+    "description": "Board 1 description",
+    "user_founder": "65340fbd234747d9b7b067d4"
+}
+
+###
+
+PUT http://localhost:8080/api/v1/boards/65342cd75021ad65fa860692
+Content-Type: application/json
+
+{
+  "name": "Board AAAAAAAAAAAAAAAAA",
+  "description": "Board 1 description updated"
+}
+
+###
+
+GET http://localhost:8080/api/v1/boards/user/65340fbd234747d9b7b067d4
+
+###
+
+DELETE http://localhost:8080/api/v1/boards/653426745e5697877a3bf40b
+
+###
+
+GET http://localhost:8080/api/v1/boards/65342b3696465010eb4b325e

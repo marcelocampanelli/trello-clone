@@ -11,6 +11,7 @@ import (
 	"github.com/marcelocampanelli/trello-clone/internal/domain/gateway"
 	"github.com/marcelocampanelli/trello-clone/internal/infra/repository"
 	"github.com/marcelocampanelli/trello-clone/internal/infra/web/handlers"
+	"github.com/marcelocampanelli/trello-clone/internal/usecase/board"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/user"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -25,6 +26,19 @@ func InitializeUserHandler(client *mongo.Client) *handlers.UserHandler {
 	return userHandler
 }
 
+func InitializeBoardHandler(client *mongo.Client) *handlers.BoardHandler {
+	boardRepository := repository.NewBoardRepository(client)
+	findAllBoardUseCase := board.NewBoardFindAllUseCase(boardRepository)
+	findByIDBoardUseCase := board.NewBoardFindByIDUseCase(boardRepository)
+	createBoardUseCase := board.NewBoardCreateUseCase(boardRepository)
+	updateBoardUseCase := board.NewBoardUpdateUseCase(boardRepository)
+	deleteBoardUseCase := board.NewBoardDeleteUseCase(boardRepository)
+	boardHandler := handlers.NewBoardHandler(findAllBoardUseCase, findByIDBoardUseCase, createBoardUseCase, updateBoardUseCase, deleteBoardUseCase)
+	return boardHandler
+}
+
 // wire.go:
 
 var setUserRepositoryDependency = wire.NewSet(repository.NewUserRepository, wire.Bind(new(gateway.UserGateway), new(*repository.UserRepository)))
+
+var setBoardRepositoryDependency = wire.NewSet(repository.NewBoardRepository, wire.Bind(new(gateway.BoardGateway), new(*repository.BoardRepository)))

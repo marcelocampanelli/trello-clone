@@ -40,7 +40,7 @@ func (useCase *FindAllBoardUseCase) Execute(input *FindAllBoardInputDTO) (*FindA
 
 	for _, board := range boards {
 		boardsReturn = append(boardsReturn, &BoardReturnDTO{
-			ID:          "",
+			ID:          board.ID.Hex(),
 			Name:        board.Name,
 			Description: board.Description,
 			CreatedAt:   board.CreatedAt.String(),

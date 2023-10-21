@@ -4,19 +4,21 @@ import (
 	"errors"
 	"github.com/go-playground/validator/v10"
 	"github.com/klassmann/cpfcnpj"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 	"time"
 )
 
 type User struct {
-	FirstName string    `json:"first_name" bson:"first_name" validate:"required"`
-	LastName  string    `json:"last_name"  bson:"last_name"  validate:"required"`
-	Nickname  string    `json:"nickname"   bson:"nickname"   validate:"required"`
-	Email     string    `json:"email"      bson:"email"      validate:"required,email"`
-	Password  string    `json:"password"   bson:"password"`
-	CPF       string    `json:"cpf"        bson:"cpf"        validate:"required,min=11,max=11"`
-	CreatedAt time.Time `json:"created_at" bson:"created_at"`
-	UpdatedAt time.Time `json:"updated_at" bson:"updated_at"`
+	ID        primitive.ObjectID `json:"id"         bson:"_id"        validate:"-"`
+	FirstName string             `json:"first_name" bson:"first_name" validate:"required"`
+	LastName  string             `json:"last_name"  bson:"last_name"  validate:"required"`
+	Nickname  string             `json:"nickname"   bson:"nickname"   validate:"required"`
+	Email     string             `json:"email"      bson:"email"      validate:"required,email"`
+	Password  string             `json:"password"   bson:"password"`
+	CPF       string             `json:"cpf"        bson:"cpf"        validate:"required,min=11,max=11"`
+	CreatedAt time.Time          `json:"created_at" bson:"created_at"`
+	UpdatedAt time.Time          `json:"updated_at" bson:"updated_at"`
 }
 
 func NewUser(firstName, lastName, nickname, email, password, cpf string) (*User, error) {
@@ -26,6 +28,7 @@ func NewUser(firstName, lastName, nickname, email, password, cpf string) (*User,
 	}
 
 	user := &User{
+		ID:        primitive.NewObjectID(),
 		FirstName: firstName,
 		LastName:  lastName,
 		Nickname:  nickname,

@@ -47,12 +47,7 @@ func (repository *BoardRepository) Update(id string, board *entity.Board) error 
 func (repository *BoardRepository) FindAll(userID string) ([]*entity.Board, error) {
 	var boards []*entity.Board
 
-	userObjectID, err := primitive.ObjectIDFromHex(userID)
-	if err != nil {
-		return nil, err
-	}
-
-	filter := primitive.M{"user_id": userObjectID}
+	filter := primitive.M{"user_founder": userID}
 
 	results, err := repository.Collection.Find(context.Background(), filter)
 	if err != nil {

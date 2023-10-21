@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/go-chi/chi/v5"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/board"
 	"net/http"
@@ -30,6 +31,7 @@ func (handler *BoardHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&input)
 	if err != nil {
+		fmt.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -40,15 +42,15 @@ func (handler *BoardHandler) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(output)
 }
 
 func (handler *BoardHandler) FindAll(w http.ResponseWriter, r *http.Request) {
 	var input board.FindAllBoardInputDTO
 
-	input.UserID = chi.URLParam(r, "user_id")
+	input.UserID = chi.URLParam(r, "userID")
 
 	output, err := handler.ucFindAll.Execute(&input)
 	if err != nil {
@@ -56,19 +58,13 @@ func (handler *BoardHandler) FindAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(output)
 }
 
 func (handler *BoardHandler) FindByID(w http.ResponseWriter, r *http.Request) {
 	var input board.FindByIDBoardInputDTO
-
-	err := json.NewDecoder(r.Body).Decode(&input)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
 
 	input.ID = chi.URLParam(r, "id")
 
@@ -78,8 +74,8 @@ func (handler *BoardHandler) FindByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(output)
 }
 
@@ -100,8 +96,8 @@ func (handler *BoardHandler) Update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(output)
 }
 
@@ -116,7 +112,7 @@ func (handler *BoardHandler) Delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusNoContent)
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNoContent)
 	json.NewEncoder(w).Encode("")
 }

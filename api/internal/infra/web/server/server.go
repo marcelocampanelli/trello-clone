@@ -21,6 +21,7 @@ func (server *Server) Start() chi.Router {
 	router.Use(middleware.Recoverer)
 	router.Group(func(r chi.Router) {
 		server.UserRoutes(r)
+		server.BoardRoutes(r)
 	})
 
 	return router
