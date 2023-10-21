@@ -9,15 +9,19 @@ import (
 type List struct {
 	ID        primitive.ObjectID `json:"id"           bson:"_id"          validate:"-"`
 	Name      string             `json:"name"         bson:"name"         validate:"required"`
+	BoardID   string             `json:"boardId"      bson:"boardId"      validate:"-"`
+	Position  int                `json:"position"     bson:"position"     validate:"-"`
 	CardsIDs  []string           `json:"cardsIds"     bson:"cardsIds"     validate:"-"`
 	CreatedAt time.Time          `json:"createdAt"    bson:"createdAt"    validate:"-"`
 	UpdatedAt time.Time          `json:"updatedAt"    bson:"updatedAt"    validate:"-"`
 }
 
-func NewList(name string) (*List, error) {
+func NewList(name, boardID string, position int) (*List, error) {
 	list := List{
 		ID:        primitive.NewObjectID(),
 		Name:      name,
+		BoardID:   boardID,
+		Position:  position,
 		CardsIDs:  []string{},
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
@@ -31,8 +35,9 @@ func NewList(name string) (*List, error) {
 	return &list, nil
 }
 
-func (list *List) Modify(name string) error {
+func (list *List) Modify(name string, position int) error {
 	list.Name = name
+	list.Position = position
 	list.UpdatedAt = time.Now()
 
 	err := list.isValid()
