@@ -30,6 +30,9 @@ func TestCreateUserUseCase_Execute(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.NotNil(t, output)
+
+	m.AssertNumberOfCalls(t, "FindByEmail", 1)
+	m.AssertNumberOfCalls(t, "FindByCPF", 1)
 }
 
 func TestCreateUserUseCase_Execute_EmailAlreadyExists(t *testing.T) {
@@ -53,6 +56,9 @@ func TestCreateUserUseCase_Execute_EmailAlreadyExists(t *testing.T) {
 	assert.Nil(t, output)
 	assert.Equal(t, ErrEmailAlreadyExists, err)
 	assert.Equal(t, "email already exists", err.Error())
+
+	m.AssertNumberOfCalls(t, "FindByEmail", 1)
+
 }
 
 func TestCreateUserUseCase_Execute_CPFAlreadyExists(t *testing.T) {
@@ -76,4 +82,6 @@ func TestCreateUserUseCase_Execute_CPFAlreadyExists(t *testing.T) {
 	assert.Nil(t, output)
 	assert.Equal(t, ErrCPFAlreadyExists, err)
 	assert.Equal(t, "cpf already exists", err.Error())
+
+	m.AssertNumberOfCalls(t, "FindByCPF", 1)
 }
