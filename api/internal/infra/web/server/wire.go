@@ -9,6 +9,7 @@ import (
 	"github.com/marcelocampanelli/trello-clone/internal/infra/repository"
 	"github.com/marcelocampanelli/trello-clone/internal/infra/web/handlers"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/board"
+	"github.com/marcelocampanelli/trello-clone/internal/usecase/list"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/user"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -19,6 +20,10 @@ var setUserRepositoryDependency = wire.NewSet(
 
 var setBoardRepositoryDependency = wire.NewSet(
 	repository.NewBoardRepository, wire.Bind(new(gateway.BoardGateway), new(*repository.BoardRepository)),
+)
+
+var setListRepositoryDependency = wire.NewSet(
+	repository.NewListRepository, wire.Bind(new(gateway.ListGateway), new(*repository.ListRepository)),
 )
 
 func InitializeUserHandler(client *mongo.Client) *handlers.UserHandler {
@@ -44,4 +49,17 @@ func InitializeBoardHandler(client *mongo.Client) *handlers.BoardHandler {
 	)
 
 	return &handlers.BoardHandler{}
+}
+
+func InitializeListHandler(client *mongo.Client) *handlers.ListHandler {
+	wire.Build(
+		setListRepositoryDependency,
+		handlers.NewListHandler,
+		wire.NewSet(list.NewListCreateUseCase, wire.Bind(new(list.CreateListUseCaseInterface), new(*list.CreateListUseCase))),
+		wire.NewSet(list.NewListFindByIDUseCase, wire.Bind(new(list.FindByIDListUseCaseInterface), new(*list.FindByIDListUseCase))),
+		wire.NewSet(list.NewListFindAllUseCase, wire.Bind(new(list.FindAllListUseCaseInterface), new(*list.FindAllListUseCase))),
+		wire.NewSet(list.NewListUpdateUseCase, wire.Bind(new(list.UpdateListUseCaseInterface), new(*list.UpdateListUseCase))),
+		wire.NewSet(list.NewListDeleteUseCase, wire.Bind(new(list.DeleteListUseCaseInterface), new(*list.DeleteListUseCase))),
+	)
+	return &handlers.ListHandler{}
 }

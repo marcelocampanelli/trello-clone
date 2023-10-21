@@ -22,6 +22,7 @@ func (server *Server) Start() chi.Router {
 	router.Group(func(r chi.Router) {
 		server.UserRoutes(r)
 		server.BoardRoutes(r)
+		server.ListRoutes(r)
 	})
 
 	return router

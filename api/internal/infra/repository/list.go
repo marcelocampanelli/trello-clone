@@ -20,19 +20,19 @@ func NewListRepository(client *mongo.Client) *ListRepository {
 	}
 }
 
-func (repository *ListRepository) Create(user *entity.User) (*entity.List, error) {
-	result, err := repository.Collection.InsertOne(context.Background(), user)
+func (repository *ListRepository) Create(list *entity.List) (*entity.List, error) {
+	result, err := repository.Collection.InsertOne(context.Background(), list)
 	if err != nil {
 		return nil, err
 	}
 
 	filter := bson.M{"_id": result.InsertedID}
 
-	var list entity.List
+	var listInserted entity.List
 
-	repository.Collection.FindOne(context.Background(), filter).Decode(&list)
+	repository.Collection.FindOne(context.Background(), filter).Decode(&listInserted)
 
-	return &list, nil
+	return &listInserted, nil
 }
 
 func (repository *ListRepository) Update(id string, list *entity.List) (*entity.List, error) {

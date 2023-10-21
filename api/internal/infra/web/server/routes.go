@@ -22,3 +22,15 @@ func (server *Server) BoardRoutes(router chi.Router) {
 		r.Delete("/{id}", handler.Delete)
 	})
 }
+
+func (server *Server) ListRoutes(router chi.Router) {
+	handler := InitializeListHandler(server.Client)
+
+	router.Route("/api/v1/lists", func(r chi.Router) {
+		r.Get("/board/{boardID}", handler.FindAll)
+		r.Post("/", handler.Create)
+		r.Get("/{id}", handler.FindByID)
+		r.Put("/{id}", handler.Update)
+		r.Delete("/{id}", handler.Delete)
+	})
+}
