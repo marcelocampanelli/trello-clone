@@ -6,7 +6,7 @@ type DeleteCardInputDTO struct {
 	ID string `json:"id"`
 }
 
-type DeleteCardUseCaseInterface interface {
+type NewDeleteCardUseCaseInterface interface {
 	Execute(input *DeleteCardInputDTO) error
 }
 
@@ -14,7 +14,7 @@ type DeleteCardUseCase struct {
 	CardGateway gateway.CardGateway
 }
 
-func NewDeleteUseCase(cardGateway gateway.CardGateway) *DeleteCardUseCase {
+func NewCardDeleteUseCase(cardGateway gateway.CardGateway) *DeleteCardUseCase {
 	return &DeleteCardUseCase{CardGateway: cardGateway}
 }
 

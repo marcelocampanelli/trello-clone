@@ -23,6 +23,7 @@ func (server *Server) Start() chi.Router {
 		server.UserRoutes(r)
 		server.BoardRoutes(r)
 		server.ListRoutes(r)
+		server.CardRoutes(r)
 	})
 
 	return router

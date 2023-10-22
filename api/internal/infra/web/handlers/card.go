@@ -10,12 +10,12 @@ import (
 type CardHandler struct {
 	ucCreate        card.CreateCardUseCaseInterface
 	ucUpdate        card.UpdateCardUseCaseInterface
-	ucDelete        card.DeleteCardUseCaseInterface
+	ucDelete        card.NewDeleteCardUseCaseInterface
 	ucFindAllByList card.FindAllByListCardUseCaseInterface
 	ucFindByID      card.FindByIDCardUseCaseInterface
 }
 
-func NewCardHandler(ucCreate card.CreateCardUseCaseInterface, ucUpdate card.UpdateCardUseCaseInterface, ucDelete card.DeleteCardUseCaseInterface, ucFindAllByList card.FindAllByListCardUseCaseInterface, ucFindByID card.FindByIDCardUseCaseInterface) *CardHandler {
+func NewCardHandler(ucCreate card.CreateCardUseCaseInterface, ucUpdate card.UpdateCardUseCaseInterface, ucDelete card.NewDeleteCardUseCaseInterface, ucFindAllByList card.FindAllByListCardUseCaseInterface, ucFindByID card.FindByIDCardUseCaseInterface) *CardHandler {
 	return &CardHandler{
 		ucCreate:        ucCreate,
 		ucUpdate:        ucUpdate,
@@ -84,7 +84,7 @@ func (handler *CardHandler) Delete(w http.ResponseWriter, r *http.Request) {
 func (handler *CardHandler) FindAllByList(w http.ResponseWriter, r *http.Request) {
 	var dto card.FindAllByListCardInputDTO
 
-	dto.ListID = chi.URLParam(r, "list_id")
+	dto.ListID = chi.URLParam(r, "listID")
 
 	output, err := handler.ucFindAllByList.Execute(&dto)
 	if err != nil {

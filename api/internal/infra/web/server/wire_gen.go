@@ -12,6 +12,7 @@ import (
 	"github.com/marcelocampanelli/trello-clone/internal/infra/repository"
 	"github.com/marcelocampanelli/trello-clone/internal/infra/web/handlers"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/board"
+	"github.com/marcelocampanelli/trello-clone/internal/usecase/card"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/list"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/user"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -49,6 +50,17 @@ func InitializeListHandler(client *mongo.Client) *handlers.ListHandler {
 	return listHandler
 }
 
+func InitializeCardHandler(client *mongo.Client) *handlers.CardHandler {
+	cardRepository := repository.NewCardRepository(client)
+	createCardUseCase := card.NewCardCreateUseCase(cardRepository)
+	updateCardUseCase := card.NewCardUpdateUseCase(cardRepository)
+	deleteCardUseCase := card.NewCardDeleteUseCase(cardRepository)
+	findAllByListCardUseCase := card.NewCardFindAllByListUseCase(cardRepository)
+	findByIDCardUseCase := card.NewCardFindByIDUseCase(cardRepository)
+	cardHandler := handlers.NewCardHandler(createCardUseCase, updateCardUseCase, deleteCardUseCase, findAllByListCardUseCase, findByIDCardUseCase)
+	return cardHandler
+}
+
 // wire.go:
 
 var setUserRepositoryDependency = wire.NewSet(repository.NewUserRepository, wire.Bind(new(gateway.UserGateway), new(*repository.UserRepository)))
@@ -56,3 +68,5 @@ var setUserRepositoryDependency = wire.NewSet(repository.NewUserRepository, wire
 var setBoardRepositoryDependency = wire.NewSet(repository.NewBoardRepository, wire.Bind(new(gateway.BoardGateway), new(*repository.BoardRepository)))
 
 var setListRepositoryDependency = wire.NewSet(repository.NewListRepository, wire.Bind(new(gateway.ListGateway), new(*repository.ListRepository)))
+
+var setCardRepositoryDependency = wire.NewSet(repository.NewCardRepository, wire.Bind(new(gateway.CardGateway), new(*repository.CardRepository)))
