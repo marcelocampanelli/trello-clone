@@ -20,6 +20,13 @@ func NewListRepository(client *mongo.Client) *ListRepository {
 	}
 }
 
+func NewTestListRepository(client *mongo.Client) *ListRepository {
+	return &ListRepository{
+		Client:     client,
+		Collection: client.Database("trello-clone-test").Collection("lists"),
+	}
+}
+
 func (repository *ListRepository) Create(list *entity.List) (*entity.List, error) {
 	result, err := repository.Collection.InsertOne(context.Background(), list)
 	if err != nil {
