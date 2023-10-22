@@ -5,9 +5,9 @@ Content-Type: application/json
   "first_name": "John",
   "last_name": "Doe",
   "nickname": "jhondoezim",
-  "email": "jhon@doe.com",
+  "email": "jhon@doeDeeeeee.com",
   "password": "123456",
-  "cpf": "35050817013"
+  "cpf": "30434015067"
 }
 
 ###
@@ -19,5 +19,15 @@ Content-Type: application/json
   "first_name": "xDDD",
   "last_name": "=)",
   "nickname": "jhondoezim",
+  "password": "123456"
+}
+
+###
+
+POST http://localhost:8080/api/v1/users/auth
+Content-Type: application/json
+
+{
+  "email": "jhon@doeeeeeee.com",
   "password": "123456"
 }

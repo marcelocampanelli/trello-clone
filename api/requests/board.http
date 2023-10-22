@@ -1,5 +1,6 @@
 POST http://localhost:8080/api/v1/boards
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTgwMDczNjYsInVzZXJfaWQiOiI2NTM0MGZiZDIzNDc0N2Q5YjdiMDY3ZDQifQ.b8T1_bIJMnAKKXCiQw5-YQeTGnTJsqJ6hVsui0VKXSk
 
 {
     "name": "Board 1",

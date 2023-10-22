@@ -6,4 +6,25 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - .docker:/data/db
+      - ./docker:/data/db
+    networks:
+      - net_service
+
+  app:
+    image: cosmtrek/air
+    working_dir: /app
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./docker:/app/api
+    depends_on:
+      - mongodb
+    networks:
+      - net_service
+
+networks:
+  net_service:
+    driver: bridge

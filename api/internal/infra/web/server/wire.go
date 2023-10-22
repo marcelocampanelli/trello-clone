@@ -37,6 +37,7 @@ func InitializeUserHandler(client *mongo.Client) *handlers.UserHandler {
 		handlers.NewUserHandler,
 		wire.NewSet(user.NewUserCreateUseCase, wire.Bind(new(user.CreateUserUseCaseInterface), new(*user.CreateUserUseCase))),
 		wire.NewSet(user.NewUserUpdateUseCase, wire.Bind(new(user.UpdateUserUseCaseInterface), new(*user.UpdateUserUseCase))),
+		wire.NewSet(user.NewCreateJWTUseCase, wire.Bind(new(user.CreateJWTUseCaseInterface), new(*user.CreateJWTUseCase))),
 	)
 
 	return &handlers.UserHandler{}

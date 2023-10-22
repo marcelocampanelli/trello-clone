@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 	"github.com/marcelocampanelli/trello-clone/internal/domain/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -59,6 +60,7 @@ func (repository *UserRepository) FindByEmail(email string) (*entity.User, error
 
 	err := repository.Collection.FindOne(context.Background(), filter).Decode(&user)
 	if err != nil {
+		fmt.Println(email)
 		return nil, err
 	}
 

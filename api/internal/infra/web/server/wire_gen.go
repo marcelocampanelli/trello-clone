@@ -24,7 +24,8 @@ func InitializeUserHandler(client *mongo.Client) *handlers.UserHandler {
 	userRepository := repository.NewUserRepository(client)
 	createUserUseCase := user.NewUserCreateUseCase(userRepository)
 	updateUserUseCase := user.NewUserUpdateUseCase(userRepository)
-	userHandler := handlers.NewUserHandler(createUserUseCase, updateUserUseCase)
+	createJWTUseCase := user.NewCreateJWTUseCase(userRepository)
+	userHandler := handlers.NewUserHandler(createUserUseCase, updateUserUseCase, createJWTUseCase)
 	return userHandler
 }
 

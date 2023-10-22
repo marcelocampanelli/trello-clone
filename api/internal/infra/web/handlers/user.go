@@ -9,15 +9,42 @@ import (
 )
 
 type UserHandler struct {
-	ucCreate user.CreateUserUseCaseInterface
-	ucUpdate user.UpdateUserUseCaseInterface
+	ucCreate    user.CreateUserUseCaseInterface
+	ucUpdate    user.UpdateUserUseCaseInterface
+	ucJWTCreate user.CreateJWTUseCaseInterface
 }
 
-func NewUserHandler(ucCreate user.CreateUserUseCaseInterface, ucUpdate user.UpdateUserUseCaseInterface) *UserHandler {
+func NewUserHandler(ucCreate user.CreateUserUseCaseInterface, ucUpdate user.UpdateUserUseCaseInterface, ucJWTCreate user.CreateJWTUseCaseInterface) *UserHandler {
 	return &UserHandler{
-		ucCreate: ucCreate,
-		ucUpdate: ucUpdate,
+		ucCreate:    ucCreate,
+		ucUpdate:    ucUpdate,
+		ucJWTCreate: ucJWTCreate,
 	}
+}
+
+func (handler *UserHandler) GetTokenJWT(w http.ResponseWriter, r *http.Request) {
+	var dto user.CreateJWTInputDTO
+
+	err := json.NewDecoder(r.Body).Decode(&dto)
+
+	if err != nil {
+		fmt.Println("User Handler: error to decode body", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	output, result := handler.ucJWTCreate.Execute(&dto)
+
+	if result != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(result.Status)
+		json.NewEncoder(w).Encode(map[string]string{"error": result.Message})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(output)
 }
 
 func (handler *UserHandler) Create(w http.ResponseWriter, r *http.Request) {
