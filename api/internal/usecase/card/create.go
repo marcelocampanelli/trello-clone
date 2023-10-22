@@ -8,6 +8,7 @@ import (
 type CreateCardInputDTO struct {
 	Name           string `json:"name"`
 	UserAssignedID string `json:"user_assigned_id"`
+	ListID         string `json:"list_id"`
 	Position       int    `json:"position"`
 }
 
@@ -15,6 +16,7 @@ type CreateCardOutputDTO struct {
 	ID             string `json:"id"`
 	Name           string `json:"name"`
 	UserAssignedID string `json:"user_assigned_id"`
+	ListID         string `json:"list_id"`
 	Position       int    `json:"position"`
 	CreatedAt      string `json:"created_at"`
 	UpdatedAt      string `json:"updated_at"`
@@ -33,7 +35,7 @@ func NewCardCreateUseCase(cardGateway gateway.CardGateway) *CreateCardUseCase {
 }
 
 func (useCase *CreateCardUseCase) Execute(input *CreateCardInputDTO) (*CreateCardOutputDTO, error) {
-	card, err := entity.NewCard(input.Name, input.UserAssignedID, input.Position)
+	card, err := entity.NewCard(input.Name, input.UserAssignedID, input.ListID, input.Position)
 	if err != nil {
 		return nil, err
 	}

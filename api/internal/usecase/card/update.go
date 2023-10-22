@@ -6,6 +6,7 @@ type UpdateCardInputDTO struct {
 	ID             string `json:"id"`
 	Name           string `json:"name"`
 	UserAssignedID string `json:"user_assigned_id"`
+	ListID         string `json:"list_id"`
 	Position       int    `json:"position"`
 }
 
@@ -13,6 +14,7 @@ type UpdateCardOutputDTO struct {
 	ID             string `json:"id"`
 	Name           string `json:"name"`
 	UserAssignedID string `json:"user_assigned_id"`
+	ListID         string `json:"list_id"`
 	Position       int    `json:"position"`
 	CreatedAt      string `json:"created_at"`
 	UpdatedAt      string `json:"updated_at"`
@@ -36,7 +38,7 @@ func (useCase *UpdateCardUseCase) Execute(input *UpdateCardInputDTO) (*UpdateCar
 		return nil, err
 	}
 
-	err = card.Modify(input.Name, input.UserAssignedID, input.Position)
+	err = card.Modify(input.Name, input.UserAssignedID, input.ListID, input.Position)
 	if err != nil {
 		return nil, err
 	}
@@ -50,6 +52,7 @@ func (useCase *UpdateCardUseCase) Execute(input *UpdateCardInputDTO) (*UpdateCar
 		ID:             result.ID.Hex(),
 		Name:           result.Name,
 		UserAssignedID: result.UserAssignedID,
+		ListID:         result.ListID,
 		Position:       result.Position,
 		CreatedAt:      result.CreatedAt.String(),
 		UpdatedAt:      result.UpdatedAt.String(),

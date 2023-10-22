@@ -10,6 +10,7 @@ type FindByIDCardOutputDTO struct {
 	ID             string `json:"id"`
 	Name           string `json:"name"`
 	UserAssignedID string `json:"user_assigned_id"`
+	ListID         string `json:"list_id"`
 	Position       int    `json:"position"`
 	CreatedAt      string `json:"created_at"`
 	UpdatedAt      string `json:"updated_at"`
@@ -37,6 +38,7 @@ func (useCase *FindByIDCardUseCase) Execute(input *FindByIDCardInputDTO) (*FindB
 		ID:             card.ID.Hex(),
 		Name:           card.Name,
 		UserAssignedID: card.UserAssignedID,
+		ListID:         card.ListID,
 		Position:       card.Position,
 		CreatedAt:      card.CreatedAt.String(),
 		UpdatedAt:      card.UpdatedAt.String(),

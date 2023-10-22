@@ -17,6 +17,7 @@ func TestCreateCardUseCase_Execute(t *testing.T) {
 		ID:             primitive.NewObjectID(),
 		Name:           "Card 1",
 		UserAssignedID: "5f7b1a9b9b9b9b9b9b9b9b9b",
+		ListID:         "5f7b1a9b9b9b9b9b9b9b9b9b",
 		Position:       1,
 		CreatedAt:      time.Now(),
 		UpdatedAt:      time.Now(),
@@ -27,6 +28,7 @@ func TestCreateCardUseCase_Execute(t *testing.T) {
 	input := &CreateCardInputDTO{
 		Name:           "Card 1",
 		UserAssignedID: "5f7b1a9b9b9b9b9b9b9b9b9b",
+		ListID:         "5f7b1a9b9b9b9b9b9b9b9b9b",
 		Position:       1,
 	}
 

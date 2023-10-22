@@ -53,8 +53,8 @@ func (_m *CardGateway) Delete(id string) error {
 	return r0
 }
 
-// FindAll provides a mock function with given fields: listID
-func (_m *CardGateway) FindAll(listID string) ([]*entity.Card, error) {
+// FindAllByList provides a mock function with given fields: listID
+func (_m *CardGateway) FindAllByList(listID string) ([]*entity.Card, error) {
 	ret := _m.Called(listID)
 
 	var r0 []*entity.Card

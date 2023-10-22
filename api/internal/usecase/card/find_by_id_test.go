@@ -19,6 +19,7 @@ func TestFindByIDCardUseCase_Execute(t *testing.T) {
 		ID:             cardID,
 		Name:           "Card 1",
 		UserAssignedID: "5f7b1a9b9b9b9b9b9b9b9b9b",
+		ListID:         "5f7b1a9b9b9b9b9b11244241",
 		Position:       1,
 		CreatedAt:      time.Now(),
 		UpdatedAt:      time.Now(),
@@ -35,5 +36,6 @@ func TestFindByIDCardUseCase_Execute(t *testing.T) {
 	assert.Equal(t, cardID.Hex(), output.ID)
 	assert.Equal(t, "Card 1", output.Name)
 	assert.Equal(t, "5f7b1a9b9b9b9b9b9b9b9b9b", output.UserAssignedID)
+	assert.Equal(t, "5f7b1a9b9b9b9b9b11244241", output.ListID)
 	assert.Equal(t, 1, output.Position)
 }
