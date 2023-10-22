@@ -20,6 +20,13 @@ func NewUserRepository(client *mongo.Client) *UserRepository {
 	}
 }
 
+func NewTestUserRepository(client *mongo.Client) *UserRepository {
+	return &UserRepository{
+		Client:     client,
+		Collection: client.Database("trello-clone-test").Collection("users"),
+	}
+}
+
 func (repository *UserRepository) Create(user *entity.User) (*string, error) {
 	result, err := repository.Collection.InsertOne(context.Background(), user)
 	if err != nil {
