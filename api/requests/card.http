@@ -1,0 +1,33 @@
+POST http://localhost:8080/api/v1/cards
+Content-Type: application/json
+
+{
+  "name": "Test Card",
+  "user_assigned_id": "1",
+  "list_id": "1",
+  "position": 1
+}
+
+###
+
+PUT http://localhost:8080/api/v1/cards/6535712b5a64c831b7004104
+Content-Type: application/json
+
+{
+  "name": "Test Card Updated",
+  "user_assigned_id": "1",
+  "list_id": "1",
+  "position": 2
+}
+
+###
+
+DELETE http://localhost:8080/api/v1/cards/6535712b5a64c831b7004104
+
+###
+
+GET http://localhost:8080/api/v1/cards/list/1
+
+###
+
+GET http://localhost:8080/api/v1/cards/653571525a64c831b7004106

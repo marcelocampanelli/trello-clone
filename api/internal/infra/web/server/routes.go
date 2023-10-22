@@ -39,10 +39,10 @@ func (server *Server) CardRoutes(router chi.Router) {
 	handler := InitializeCardHandler(server.Client)
 
 	router.Route("/api/v1/cards", func(r chi.Router) {
-		r.Get("/list/{listID}", handler.FindAllByList)
 		r.Post("/", handler.Create)
-		r.Get("/{id}", handler.FindByID)
 		r.Put("/{id}", handler.Update)
 		r.Delete("/{id}", handler.Delete)
+		r.Get("/{id}", handler.FindByID)
+		r.Get("/list/{listID}", handler.FindAllByList)
 	})
 }

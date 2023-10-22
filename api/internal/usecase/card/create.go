@@ -50,6 +50,7 @@ func (useCase *CreateCardUseCase) Execute(input *CreateCardInputDTO) (*CreateCar
 		Name:           result.Name,
 		UserAssignedID: result.UserAssignedID,
 		Position:       result.Position,
+		ListID:         result.ListID,
 		CreatedAt:      result.CreatedAt.String(),
 		UpdatedAt:      result.UpdatedAt.String(),
 	}, nil
