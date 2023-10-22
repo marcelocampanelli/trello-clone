@@ -47,5 +47,4 @@ func (useCase *UpdateListUseCase) Execute(input *UpdateListInputDTO) (*UpdateLis
 		Name:     result.Name,
 		Position: result.Position,
 	}, nil
-
 }
