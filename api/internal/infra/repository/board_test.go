@@ -21,7 +21,8 @@ func TestBoardRepository_Create(t *testing.T) {
 	assert.NotNil(t, result)
 	assert.IsType(t, result, new(string))
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestBoardRepository_Update(t *testing.T) {
@@ -45,7 +46,8 @@ func TestBoardRepository_Update(t *testing.T) {
 	err = repository.Update(*result, boardFinded)
 	assert.Nil(t, err)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestBoardRepository_FindByID(t *testing.T) {
@@ -64,7 +66,8 @@ func TestBoardRepository_FindByID(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, boardFinded)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestBoardRepository_Delete(t *testing.T) {
@@ -82,7 +85,8 @@ func TestBoardRepository_Delete(t *testing.T) {
 	err = repository.Delete(*result)
 	assert.Nil(t, err)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestBoardRepository_FindAll(t *testing.T) {
@@ -109,5 +113,6 @@ func TestBoardRepository_FindAll(t *testing.T) {
 	assert.NotNil(t, boards)
 	assert.Equal(t, len(boards), 2)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }

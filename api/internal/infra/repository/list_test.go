@@ -19,7 +19,8 @@ func TestNewListRepository_Create(t *testing.T) {
 	list, err = repository.Create(list)
 	assert.Nil(t, err)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestNewListRepository_Update(t *testing.T) {
@@ -43,7 +44,8 @@ func TestNewListRepository_Update(t *testing.T) {
 	assert.Equal(t, list.Name, "List updated")
 	assert.Equal(t, list.Position, 2)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestNewListRepository_Delete(t *testing.T) {
@@ -61,7 +63,8 @@ func TestNewListRepository_Delete(t *testing.T) {
 	err = repository.Delete(list.ID.Hex())
 	assert.Nil(t, err)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestNewListRepository_FindByID(t *testing.T) {
@@ -80,7 +83,8 @@ func TestNewListRepository_FindByID(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, list)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestNewListRepository_FindAll(t *testing.T) {
@@ -108,5 +112,6 @@ func TestNewListRepository_FindAll(t *testing.T) {
 	assert.NotNil(t, lists)
 	assert.Equal(t, len(lists), 2)
 
-	client.Database("trello-clone-test").Drop(nil)
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }

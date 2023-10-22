@@ -20,6 +20,9 @@ func TestUserRepository_Create(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, userID)
 	assert.IsType(t, userID, new(string))
+
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestUSerRepository_Update(t *testing.T) {
@@ -42,6 +45,9 @@ func TestUSerRepository_Update(t *testing.T) {
 	err = repository.Update(*userID, user)
 
 	assert.Nil(t, err)
+
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestUserRepository_FindByEmail(t *testing.T) {
@@ -60,6 +66,9 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, user)
 	assert.IsType(t, user, new(entity.User))
+
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestUserRepository_FindByID(t *testing.T) {
@@ -78,6 +87,9 @@ func TestUserRepository_FindByID(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, user)
 	assert.IsType(t, user, new(entity.User))
+
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
 
 func TestUserRepository_FindByCPF(t *testing.T) {
@@ -96,4 +108,7 @@ func TestUserRepository_FindByCPF(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, user)
 	assert.IsType(t, user, new(entity.User))
+
+	err = client.Database("trello-clone-test").Drop(nil)
+	assert.Nil(t, err)
 }
