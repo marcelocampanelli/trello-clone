@@ -19,6 +19,13 @@ func NewBoardRepository(client *mongo.Client) *BoardRepository {
 	}
 }
 
+func NewTestBoardRepository(client *mongo.Client) *BoardRepository {
+	return &BoardRepository{
+		Client:     client,
+		Collection: client.Database("trello-clone-test").Collection("boards"),
+	}
+}
+
 func (repository *BoardRepository) Create(board *entity.Board) (*string, error) {
 	result, err := repository.Collection.InsertOne(context.Background(), board)
 	if err != nil {
