@@ -1,10 +1,11 @@
 package card
 
 import (
+	"testing"
+
 	mocks "github.com/marcelocampanelli/trello-clone/test/mock/gateway"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"testing"
 )
 
 func TestDeleteCardUseCase_Execute(t *testing.T) {
@@ -12,7 +13,7 @@ func TestDeleteCardUseCase_Execute(t *testing.T) {
 
 	m.On("Delete", mock.Anything).Return(nil)
 
-	useCase := NewDeleteUseCase(m)
+	useCase := NewCardDeleteUseCase(m)
 
 	input := DeleteCardInputDTO{
 		ID: "1",

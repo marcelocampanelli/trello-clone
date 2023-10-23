@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+
 	"github.com/marcelocampanelli/trello-clone/internal/domain/entity"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -47,6 +48,9 @@ func (repository *BoardRepository) Update(id string, board *entity.Board) error 
 	update := primitive.M{"$set": board}
 
 	_, err = repository.Collection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
