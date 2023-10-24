@@ -1,5 +1,6 @@
 .docker
 .idea
 ./api/.idea
-
+./front/.vscode
+.vscode
 docker

@@ -3,9 +3,10 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/marcelocampanelli/trello-clone/internal/usecase/user"
-	"net/http"
 )
 
 type UserHandler struct {
@@ -27,7 +28,7 @@ func (handler *UserHandler) GetTokenJWT(w http.ResponseWriter, r *http.Request) 
 
 	err := json.NewDecoder(r.Body).Decode(&dto)
 
-	if err != nil {
+		if err != nil {
 		fmt.Println("User Handler: error to decode body", err)
 		w.WriteHeader(http.StatusBadRequest)
 		return

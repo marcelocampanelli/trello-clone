@@ -16,7 +16,7 @@ func ConnectMongoDB() (*mongo.Client, error) {
 
 	sugar := logger.Sugar()
 
-	connectionString := "mongodb://mongodb:27017"
+	connectionString := "mongodb://localhost:27017"
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10000000*time.Second)
 	defer cancel()
@@ -26,7 +26,6 @@ func ConnectMongoDB() (*mongo.Client, error) {
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		panic(err)
-		return nil, err
 	}
 
 	err = client.Ping(ctx, nil)
