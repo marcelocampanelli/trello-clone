@@ -2,5 +2,9 @@
 .idea
 ./api/.idea
 ./front/.vscode
+./front/node_modules
+
+/front/node_modules
+
 .vscode
 docker
