@@ -1,5 +1,6 @@
 <script>
-  import axiosInstance from '../middleware/axios'
+  import axiosInstance from '../middlewares/axios'
+
 
   let email = ''
   let password = ''
@@ -13,12 +14,11 @@
     await axiosInstance
       .post('/users/auth', data)
       .then(response => {
-        localStorage.setItem('token', response.data.token)
-        window.location.href = '/dashboard'
-      }).catch(error => {
+          localStorage.setItem('token', response.data.token)
+        },
+      ).catch(error => {
         console.log(error)
       })
-
   }
 
   $: fieldsNotNull = email === '' || password === ''
@@ -31,20 +31,40 @@
         <form on:submit={handleSubmit}>
           <h1 class='color-white text-5xl font-bold'>Login</h1>
           <p class='color-white mt-5 font-extralight'>acesse sua conta =)</p>
-          <input bind:value={email} class='w-full input-login mt-10' placeholder='email' type='text' /> <br>
-          <input bind:value={password} class='mt-3 w-full input-login mb-3' placeholder='password'
-                 type='password' />
-          <a class='color-white mt-5 font-extralight' href='/'>não tem uma conta? crie uma</a>
+          <input
+            bind:value={email}
+            class='w-full input-login mt-10'
+            placeholder='email'
+            type='text'
+          /> <br>
+          <input
+            bind:value={password}
+            class='mt-3 w-full input-login mb-3'
+            placeholder='password'
+            type='password' />
+          <a
+            class='color-white mt-5 font-extralight'
+            href='/'>
+            não tem uma conta? crie uma
+          </a>
           <button
             class='mt-5 w-full background-purple  py-3 rounded-md text-black font-bold color-white disabled:opacity-50'
-            disabled={fieldsNotNull} type='submit'>Login
+            disabled={fieldsNotNull}
+            type='submit'>
+            Login
           </button>
         </form>
       </div>
-
     </div>
   </div>
-  <div class='flex-1 background-img background-purple' />
+  <div class='flex-1 background-img background-purple flex flex-1 justify-center pt-20'>
+    <div class='flex-1 justify-center items-center flex'>
+      <div class='w-1/2'>
+        <h1 class='color-white text-5xl font-bold'>Bem vindo</h1>
+        <p class='color-white mb-20 font-extralight'>Aqui você pode criar e gerenciar suas tarefas</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <style scoped>
