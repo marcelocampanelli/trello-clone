@@ -7,12 +7,12 @@ Content-Type: application/json
   "nickname": "jhondoezim",
   "email": "teste@test.com",
   "password": "teste@test",
-  "cpf": "76118993092"
+  "cpf": "30062029029"
 }
 
 ###
 
-PUT http://localhost:8080/api/v1/users/6542d7c967ec844df4ba98fb
+PUT http://localhost:8080/api/v1/users/6544053fcd2eccce67198820
 Content-Type: application/json
 
 {

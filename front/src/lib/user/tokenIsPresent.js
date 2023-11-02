@@ -1,7 +1,9 @@
 let tokenIsPresent = false;
+let user = localStorage.getItem("user");
 
-if (localStorage.getItem("user_token") !== null) {
-  tokenIsPresent = true;
+
+if (user !== undefined && user !== null) {
+	tokenIsPresent = true;
 }
 
 export default tokenIsPresent;

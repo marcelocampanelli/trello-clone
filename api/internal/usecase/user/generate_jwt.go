@@ -13,7 +13,10 @@ type CreateJWTInputDTO struct {
 }
 
 type CreateJWTOutputDTO struct {
-	Token string `json:"token"`
+	Token     string `json:"token"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Email     string `json:"email"`
 }
 
 type CreateJWTUseCase struct {
@@ -46,6 +49,9 @@ func (useCase *CreateJWTUseCase) Execute(input *CreateJWTInputDTO) (*CreateJWTOu
 	})
 
 	return &CreateJWTOutputDTO{
-		Token: tokenString,
+		Token:     tokenString,
+		FirstName: user.FirstName,
+		LastName:  user.LastName,
+		Email:     user.Email,
 	}, nil
 }
