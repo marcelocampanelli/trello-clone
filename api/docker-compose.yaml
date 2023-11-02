@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: trello-clonedb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./docker:/data/db
+    networks:
+      - net_service
+
+
+  app:
+    image: cosmtrek/air:v1.28.0
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongodb
+    networks:
+      - net_service
+
+networks:
+  net_service:
+    driver: bridge

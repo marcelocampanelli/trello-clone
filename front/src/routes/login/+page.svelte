@@ -1,6 +1,7 @@
 <script lang="js">
-  import axiosApiV1 from "$lib/axios";
+  import axiosApiV1 from "$lib/axios/api/v1/axios";
   import defineToken from "$lib/user/defineUserToken";
+  import tokenIsPresent from "$lib/user/tokenIsPresent";
 
   let user = {
     email: "",
@@ -12,6 +13,10 @@
       .post("/users/auth", user)
       .then((res) => {
         defineToken(res.data.token);
+
+        if (tokenIsPresent) {
+          window.location.href = "/boards";
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -70,7 +75,7 @@
   </div>
 </div>
 
-<style>
+<style scoped>
   .vh100 {
     height: 100vh;
   }

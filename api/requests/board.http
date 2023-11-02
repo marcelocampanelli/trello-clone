@@ -1,11 +1,11 @@
 POST http://localhost:8080/api/v1/boards
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTgwMDczNjYsInVzZXJfaWQiOiI2NTM0MGZiZDIzNDc0N2Q5YjdiMDY3ZDQifQ.b8T1_bIJMnAKKXCiQw5-YQeTGnTJsqJ6hVsui0VKXSk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTg5NTU4ODQsInVzZXJfaWQiOiI2NTQyZDdjOTY3ZWM4NDRkZjRiYTk4ZmIifQ.0CKbvZP6Vm7V_mUNUb_wdKMXTFWgcdxRfLsvNNIgz9Q
 
 {
     "name": "Board 1",
     "description": "Board 1 description",
-    "user_founder": "65340fbd234747d9b7b067d4"
+    "user_founder": "6542d7c967ec844df4ba98fb"
 }
 
 ###
